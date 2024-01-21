@@ -1,38 +1,41 @@
 import java.util.ArrayList;              // Pojo Class must have
 import java.util.List;                   // 1. Constructor
 import java.util.Scanner;                //2. getter(),setter()
-                                         //3. toString() 4.hashcode 5.equals()
+
+//3. toString() 4.hashcode 5.equals()
 public class CarRentalSystem {
     private List<Car> cars; //int [] arr = new int [];
 
-    private List<Customer>customers;
+    private List<Customer> customers;
 
-    private List<Rental>rentals;
+    private List<Rental> rentals;
 
-                                             public CarRentalSystem(List<Car> cars) {
-                                                 this.cars = cars;
-                                             }
-
-                                             //    public CarRentalSystem(){
-//        cars = new ArrayList<>();
-//        customers = new ArrayList<>();
-//        rentals = new ArrayList<>();
+//    public CarRentalSystem(List<Car> cars) {
+//        this.cars = cars;
 //    }
-    public void addCar(Car car){
+
+        public CarRentalSystem(){
+        cars = new ArrayList<>();
+        customers = new ArrayList<>();
+        rentals = new ArrayList<>();
+    }
+    public void addCar(Car car) {
         cars.add(car);
     }
 
-    public void addCustomer(Customer customer){
+    public void addCustomer(Customer customer) {
         customers.add(customer);
     }
-    public void rentCar(Car car,Customer customer,int days){
-        if (car.isAvailable()){
+
+    public void rentCar(Car car, Customer customer, int days) {
+        if (car.isAvailable()) {
             car.rent();
-            rentals.add(new Rental(car,customer,days));
+            rentals.add(new Rental(car, customer, days));
         } else {
             System.out.println("car is not available for rent");
         }
     }
+
     public void returnCar(Car car) {
         car.returnCar();
         Rental rentalToRemove = null;
@@ -51,10 +54,10 @@ public class CarRentalSystem {
         }
     }
 
-        public void menu(){
+    public void menu() {
         Scanner scanner = new Scanner(System.in);
 
-        while (true){
+        while (true) {
             System.out.println("**** Car Rental System ****");
             System.out.println("1. Rent a Car");
             System.out.println("2. Return a car");
@@ -64,7 +67,7 @@ public class CarRentalSystem {
             int choice = scanner.nextInt();
             scanner.nextLine();
 
-            if (choice==1) {
+            if (choice == 1) {
                 System.out.println("\n== Rent a Car==\n");
                 System.out.println("Enter your name");
                 String customerName = scanner.nextLine();
@@ -113,50 +116,48 @@ public class CarRentalSystem {
                 } else {
                     System.out.println("\nInvalid Car selection or car not available for rent");
                 }
-            }     else if (choice == 2){
-                          System.out.println("\n== Return a Car ==\n");
-                          System.out.println("enter a car ID you want to return");
-                          String carID = scanner.nextLine();
+            } else if (choice == 2) {
+                System.out.println("\n== Return a Car ==\n");
+                System.out.println("enter a car ID you want to return");
+                String carID = scanner.nextLine();
 
-                          Car carToReturn = null;
-                          for (Car car:cars){
-                              if (car.getCarId().equals(carID) && !car.isAvailable()){
-                                  carToReturn = car;
-                                  break;
-                              }
-                          }
-                          if (carToReturn!= null){
-                              Customer customer = null;
-                              for (Rental rental:rentals){
-                                  if (rental.getCar() == carToReturn){
-                                      customer = rental.getCustomer();
-                                      break;
-                                  }
-                              }
-                              if(customer!= null){
-                                  returnCar(carToReturn);
-                                  System.out.println("Car returned successfully by " + customer.getName());
-                              }else {
-                                  System.out.println("car was not rented or rental information is missing");
-                              }
-                          } else{
-                              System.out.println("Invalid Car ID or car not rented");
-                          }
-
-
-
-                      } else if (choice==3){
-                          break;
-                      }else {
-                          System.out.println("Invalid choice. enter a valid option");
-                      }
+                Car carToReturn = null;
+                for (Car car : cars) {
+                    if (car.getCarId().equals(carID) && !car.isAvailable()) {
+                        carToReturn = car;
+                        break;
+                    }
+                }
+                if (carToReturn != null) {
+                    Customer customer = null;
+                    for (Rental rental : rentals) {
+                        if (rental.getCar() == carToReturn) {
+                            customer = rental.getCustomer();
+                            break;
+                        }
+                    }
+                    if (customer != null) {
+                        returnCar(carToReturn);
+                        System.out.println("Car returned successfully by " + customer.getName());
+                    } else {
+                        System.out.println("car was not rented or rental information is missing");
+                    }
+                } else {
+                    System.out.println("Invalid Car ID or car not rented");
+                }
 
 
-
-                  }
-                         System.out.println("Thank You For Using Yeshwant Car Rental System");
+            } else if (choice == 3) {
+                break;
+            } else {
+                System.out.println("Invalid choice. enter a valid option");
             }
+
+
         }
+        System.out.println("Thank You For Using Yeshwant Car Rental System");
+    }
+}
 
 
 

@@ -13,17 +13,17 @@ public class Car {
 
     private boolean isAvailable;
 
-    public Car(String carId,String brand,String model,double basePricePerDay,boolean isAvailable){
+    public Car(String carId,String brand,String model,double basePricePerDay,boolean isAvailable ){
         this.carId = carId;
         this.brand = brand;
         this.model = model;
         this.basePricePerDay = basePricePerDay;
-        this.isAvailable = true;
+        this.isAvailable = isAvailable;
 
     }
 
-    public Car(String c003, String lamborghini, String avantador, String s) {
-    }
+//    public Car(String c003, String lamborghini, String avantador, String s) {
+//    }
 
     public String getCarId() {
         return carId;
